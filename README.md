@@ -5,6 +5,12 @@ Test project for interactive matplotlib plots (`%matplotlib widget` / ipympl) in
 ## Renku setup (once)
 The packages in `requirements.txt` are only installed if Renku **builds the session environment from this repository**. A launcher that uses a ready-made image (e.g. "Python Datascience") ignores this file.
 
+A built session has two Python environments:
+- **`requirements.txt`** goes into the **kernel**, where the notebook code runs.
+- **`jupyterlab_extensions.txt`** goes into the **JupyterLab server**, which draws what you see in the browser.
+
+ipympl needs to be in both, with the same version, otherwise figures only appear as static images. `jupyterlab_extensions.txt` is read by Renku's JupyterLab buildpack ([source](https://github.com/SwissDataScienceCenter/renku-frontend-buildpacks/blob/main/buildpacks/jupyterlab/bin/build)), but this isn't documented.
+
 1. In the Renku project, add this repository under **Code repositories**: `https://github.com/htlemke/dexplorer`
 2. Go to **Sessions → Add session launcher** and choose **Create from code**.
    Select this repository and **JupyterLab** as the frontend.
